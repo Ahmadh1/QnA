@@ -31,4 +31,16 @@ class Question extends Model
     public function formattedDate()  {
         return $this->created_at->diffForHumans();
     }
+
+    // Accessor for Status
+
+    public function getStatusAttribute() {
+        if ($this->answers > 0) {
+            if ($this->best_answer_id) {
+                return "accepted";
+            }
+            return "answered";
+        }
+        return "unanswered";
+    }
 }
